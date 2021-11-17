@@ -8,6 +8,7 @@
 }
 
 .box {
+    background-color: white;
     border: solid black;
     border-width: 1px;
     height: 50px;

@@ -8,14 +8,34 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id='controls'>
+        <button id='color'>Color</button>
+        <button id='erase'>Erase</button>
+    </div>
     <div id="container"></div>
 </body>
 
 <script>
-    function colorChange(e) {
-        e.target.classList.add('color');
+    const DEFAULT_COLOR = 'black';
+    const DEFAULT_MODE = 'color';
+
+    let currentColor = DEFAULT_COLOR;
+    let currentMode = DEFAULT_MODE;
+
+    function setErase() {
+        currentColor = 'white';
+        return currentColor;
+    }
+
+    function setColor() {
+        currentColor = 'black';
+        return currentColor;
     }
     
+    function colorChange(e) {
+        e.target.style.backgroundColor = currentColor;
+    }
+
     const container = document.getElementById("container");
     
     for (let i = 1; i <= (16 * 16); i++) {
@@ -27,5 +47,7 @@
         item.addEventListener('mouseover', colorChange);
     });
 
+    document.querySelector('#erase').addEventListener('click', setErase);
+    document.querySelector('#color').addEventListener('click', setColor);
 </script>
 </html>
