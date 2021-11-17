@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick Uram's Etch-a-sketch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container"></div>
+</body>
+
+<script>
+    function colorChange(e) {
+        e.target.classList.add('color');
+    }
+    
+    const container = document.getElementById("container");
+    
+    for (let i = 1; i <= (16 * 16); i++) {
+        let box = document.createElement("div");
+        container.appendChild(box).className = "box";
+    }
+
+    document.querySelectorAll(".box").forEach(item => {
+        item.addEventListener('mouseover', colorChange);
+    });
+
+</script>
+</html>
