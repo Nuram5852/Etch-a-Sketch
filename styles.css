@@ -1,20 +1,32 @@
+body {
+    display: grid;
+    justify-content: center;
+}
+
 #container {
     display: grid;
-    grid-template-columns: repeat(16, 50px);
-    grid-template-rows: repeat(16, 50px);
+    grid-template-columns: repeat(16, 40px);
+    grid-template-rows: repeat(16, 40px);
     justify-content: center;
     align-items: center;
-    padding-top: 45px;
+    margin-top: 45px;
+    border: 1px solid black;
+    height: min-content;
+    width: min-content;
 }
 
 .box {
     background-color: white;
     border: solid black;
     border-width: 1px;
-    height: 50px;
-    width:50px;
+    height: 40px;
+    width:40px;
 }
 
 .color {
     background-color: black;
+}
+
+.noBorder {
+    border: none;
 }

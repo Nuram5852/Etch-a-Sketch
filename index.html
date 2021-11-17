@@ -10,12 +10,18 @@
 <body>
     <div id='controls'>
         <button id='color'>Color</button>
+        <button id='rainbow'>Rainbow</button>
         <button id='erase'>Erase</button>
+        <button id ='borders'>Toggle Borders</button>
+        <button id='reset'>Reset</button>
     </div>
     <div id="container"></div>
 </body>
 
 <script>
+    const container = document.getElementById("container");
+    const gridItems = document.querySelectorAll('.box');
+
     const DEFAULT_COLOR = 'black';
     const DEFAULT_MODE = 'color';
 
@@ -24,19 +30,43 @@
 
     function setErase() {
         currentColor = 'white';
+        currentMode = 'erase';
         return currentColor;
     }
 
     function setColor() {
         currentColor = 'black';
+        currentMode = 'color';
         return currentColor;
     }
-    
+
     function colorChange(e) {
-        e.target.style.backgroundColor = currentColor;
+        if (currentMode === 'rainbow') {
+            e.target.style.backgroundColor = randomColor();
+        } else {
+            e.target.style.backgroundColor = currentColor;
+        }
     }
 
-    const container = document.getElementById("container");
+    function toggleBorder() {
+        document.querySelectorAll('.box').forEach(item => {
+            item.classList.toggle('noBorder');
+        });
+    }
+
+    function randomColor() {
+        let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        return color;
+    }
+
+    function setRainbow() {
+        currentMode = 'rainbow';
+        return currentMode;
+    }
+
+    //function resetGrid(gridItems) {
+        
+    //}
     
     for (let i = 1; i <= (16 * 16); i++) {
         let box = document.createElement("div");
@@ -49,5 +79,9 @@
 
     document.querySelector('#erase').addEventListener('click', setErase);
     document.querySelector('#color').addEventListener('click', setColor);
+    document.querySelector('#borders').addEventListener('click', toggleBorder);
+    //document.querySelector('#reset').addEventListener('click', resetGrid);
+    document.querySelector('#rainbow').addEventListener('click', setRainbow);
+    
 </script>
 </html>
