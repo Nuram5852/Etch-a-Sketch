@@ -1,26 +1,31 @@
+:root {
+    --columns: 16;
+    --rows: 16;
+}
+
 body {
     display: grid;
     justify-content: center;
 }
 
 #container {
+    min-height: 37vw;
+    min-width: 37vw;
     display: grid;
-    grid-template-columns: repeat(16, 40px);
-    grid-template-rows: repeat(16, 40px);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
     justify-content: center;
     align-items: center;
     margin-top: 45px;
     border: 1px solid black;
-    height: min-content;
-    width: min-content;
+    box-sizing: border-box;
 }
 
 .box {
     background-color: white;
-    border: solid black;
-    border-width: 1px;
-    height: 40px;
-    width:40px;
+    padding: 50%;
+    border: 1px solid black;
+    box-sizing: border-box;
 }
 
 .color {

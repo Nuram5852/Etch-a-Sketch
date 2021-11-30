@@ -15,6 +15,10 @@
         <button id ='borders'>Toggle Borders</button>
         <button id='reset'>Reset</button>
     </div>
+    <div id='selector'>
+        <input type='range' value='16' min='2' max='64' id='range-slider' onmousemove='rangeValue(this.value)' onChange='changeRangeValue(this.value)'>
+        <div id='range-value'></div>
+    </div>
     <div id="container"></div>
 </body>
 
@@ -64,24 +68,48 @@
         return currentMode;
     }
 
-    //function resetGrid(gridItems) {
-        
-    //}
-    
-    for (let i = 1; i <= (16 * 16); i++) {
-        let box = document.createElement("div");
-        container.appendChild(box).className = "box";
+    function clearGrid() {
+        container.innerHTML = '';
     }
 
-    document.querySelectorAll(".box").forEach(item => {
-        item.addEventListener('mouseover', colorChange);
-    });
+    function resetGrid() {
+        clearGrid();
+        loadGrid();
+    }
+    
+    function loadGrid() {
+        let columns = getComputedStyle(document.documentElement).getPropertyValue('--columns');
+        let rows = getComputedStyle(document.documentElement).getPropertyValue('--rows');
 
+        for (let i = 1; i <= (columns * rows); i++) {
+        let box = document.createElement("div");
+        container.appendChild(box).className = "box";
+        } 
+
+        document.querySelectorAll(".box").forEach(item => {
+            item.addEventListener('mouseover', colorChange);
+    });
+    }
+
+    function rangeValue(value) {
+        let gridLabel = document.getElementById('range-value');
+        gridLabel.textContent = value;
+    }
+
+    function changeRangeValue(value) {
+        document.documentElement.style.setProperty('--columns', value);
+        document.documentElement.style.setProperty('--rows', value);
+        resetGrid();
+    }
+
+    loadGrid();
+    
     document.querySelector('#erase').addEventListener('click', setErase);
     document.querySelector('#color').addEventListener('click', setColor);
     document.querySelector('#borders').addEventListener('click', toggleBorder);
-    //document.querySelector('#reset').addEventListener('click', resetGrid);
+    document.querySelector('#reset').addEventListener('click', resetGrid);
     document.querySelector('#rainbow').addEventListener('click', setRainbow);
+    
     
 </script>
 </html>
